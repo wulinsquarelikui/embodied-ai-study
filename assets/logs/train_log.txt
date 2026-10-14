@@ -1,0 +1,86 @@
+设备: mps   参数量: 51.6M（可训练 51.6M）
+每次推理输出: 未来 100 步 × 6 个关节 = 3.3 秒的动作
+训练集 28 条示教 / 9454 帧；验证集 2 条 / 659 帧
+step      1/3000  loss=84.331  l1=0.983  kld=8.335  3414 ms/step  ETA 170.6 min
+step     50/3000  loss=6.223  l1=0.728  kld=0.549  250 ms/step  ETA 12.3 min
+step    100/3000  loss=4.290  l1=0.732  kld=0.356  256 ms/step  ETA 12.4 min
+step    150/3000  loss=3.875  l1=0.677  kld=0.320  259 ms/step  ETA 12.3 min
+step    200/3000  loss=3.479  l1=0.639  kld=0.284  257 ms/step  ETA 12.0 min
+step    250/3000  loss=3.313  l1=0.639  kld=0.267  257 ms/step  ETA 11.8 min
+step    300/3000  loss=3.181  l1=0.680  kld=0.250  257 ms/step  ETA 11.5 min
+step    350/3000  loss=3.187  l1=0.702  kld=0.248  258 ms/step  ETA 11.4 min
+step    400/3000  loss=3.115  l1=0.475  kld=0.264  258 ms/step  ETA 11.2 min
+step    450/3000  loss=2.654  l1=0.457  kld=0.220  269 ms/step  ETA 11.4 min
+step    500/3000  loss=2.790  l1=0.704  kld=0.209  280 ms/step  ETA 11.7 min
+  [验证] 没见过的 2 条示教上 l1=0.657
+step    550/3000  loss=2.575  l1=0.526  kld=0.205  357 ms/step  ETA 14.6 min
+step    600/3000  loss=2.345  l1=0.406  kld=0.194  256 ms/step  ETA 10.2 min
+step    650/3000  loss=2.175  l1=0.403  kld=0.177  256 ms/step  ETA 10.0 min
+step    700/3000  loss=2.591  l1=0.490  kld=0.210  256 ms/step  ETA 9.8 min
+step    750/3000  loss=2.312  l1=0.460  kld=0.185  256 ms/step  ETA 9.6 min
+step    800/3000  loss=2.194  l1=0.542  kld=0.165  258 ms/step  ETA 9.5 min
+step    850/3000  loss=2.145  l1=0.425  kld=0.172  256 ms/step  ETA 9.2 min
+step    900/3000  loss=2.201  l1=0.550  kld=0.165  258 ms/step  ETA 9.0 min
+step    950/3000  loss=2.054  l1=0.345  kld=0.171  256 ms/step  ETA 8.7 min
+step   1000/3000  loss=2.044  l1=0.483  kld=0.156  255 ms/step  ETA 8.5 min
+  [验证] 没见过的 2 条示教上 l1=0.573
+step   1050/3000  loss=1.884  l1=0.445  kld=0.144  288 ms/step  ETA 9.4 min
+step   1100/3000  loss=1.644  l1=0.459  kld=0.119  255 ms/step  ETA 8.1 min
+step   1150/3000  loss=1.681  l1=0.427  kld=0.125  255 ms/step  ETA 7.9 min
+step   1200/3000  loss=1.971  l1=0.466  kld=0.151  262 ms/step  ETA 7.9 min
+step   1250/3000  loss=1.633  l1=0.304  kld=0.133  257 ms/step  ETA 7.5 min
+step   1300/3000  loss=1.658  l1=0.354  kld=0.130  258 ms/step  ETA 7.3 min
+step   1350/3000  loss=1.655  l1=0.261  kld=0.139  257 ms/step  ETA 7.1 min
+step   1400/3000  loss=1.658  l1=0.321  kld=0.134  257 ms/step  ETA 6.9 min
+step   1450/3000  loss=1.533  l1=0.381  kld=0.115  258 ms/step  ETA 6.7 min
+step   1500/3000  loss=1.664  l1=0.346  kld=0.132  259 ms/step  ETA 6.5 min
+  [验证] 没见过的 2 条示教上 l1=0.529
+step   1550/3000  loss=1.615  l1=0.429  kld=0.119  289 ms/step  ETA 7.0 min
+step   1600/3000  loss=1.511  l1=0.404  kld=0.111  258 ms/step  ETA 6.0 min
+step   1650/3000  loss=1.514  l1=0.406  kld=0.111  258 ms/step  ETA 5.8 min
+step   1700/3000  loss=1.455  l1=0.408  kld=0.105  259 ms/step  ETA 5.6 min
+step   1750/3000  loss=1.442  l1=0.334  kld=0.111  262 ms/step  ETA 5.5 min
+step   1800/3000  loss=1.420  l1=0.421  kld=0.100  262 ms/step  ETA 5.2 min
+step   1850/3000  loss=1.307  l1=0.293  kld=0.101  261 ms/step  ETA 5.0 min
+step   1900/3000  loss=1.501  l1=0.378  kld=0.112  258 ms/step  ETA 4.7 min
+step   1950/3000  loss=1.059  l1=0.224  kld=0.084  259 ms/step  ETA 4.5 min
+step   2000/3000  loss=1.315  l1=0.386  kld=0.093  262 ms/step  ETA 4.4 min
+  [验证] 没见过的 2 条示教上 l1=0.542
+step   2050/3000  loss=1.239  l1=0.384  kld=0.085  299 ms/step  ETA 4.7 min
+step   2100/3000  loss=1.440  l1=0.486  kld=0.095  264 ms/step  ETA 4.0 min
+step   2150/3000  loss=1.285  l1=0.269  kld=0.102  263 ms/step  ETA 3.7 min
+step   2200/3000  loss=1.183  l1=0.320  kld=0.086  264 ms/step  ETA 3.5 min
+step   2250/3000  loss=1.197  l1=0.334  kld=0.086  263 ms/step  ETA 3.3 min
+step   2300/3000  loss=1.088  l1=0.304  kld=0.078  265 ms/step  ETA 3.1 min
+step   2350/3000  loss=1.051  l1=0.361  kld=0.069  264 ms/step  ETA 2.9 min
+step   2400/3000  loss=1.028  l1=0.324  kld=0.070  267 ms/step  ETA 2.7 min
+step   2450/3000  loss=1.072  l1=0.295  kld=0.078  264 ms/step  ETA 2.4 min
+step   2500/3000  loss=0.990  l1=0.305  kld=0.068  264 ms/step  ETA 2.2 min
+  [验证] 没见过的 2 条示教上 l1=0.520
+step   2550/3000  loss=1.038  l1=0.333  kld=0.071  298 ms/step  ETA 2.2 min
+step   2600/3000  loss=1.033  l1=0.409  kld=0.062  265 ms/step  ETA 1.8 min
+step   2650/3000  loss=0.964  l1=0.226  kld=0.074  265 ms/step  ETA 1.5 min
+step   2700/3000  loss=1.131  l1=0.461  kld=0.067  266 ms/step  ETA 1.3 min
+step   2750/3000  loss=0.967  l1=0.354  kld=0.061  265 ms/step  ETA 1.1 min
+step   2800/3000  loss=0.850  l1=0.286  kld=0.056  266 ms/step  ETA 0.9 min
+step   2850/3000  loss=0.900  l1=0.249  kld=0.065  266 ms/step  ETA 0.7 min
+step   2900/3000  loss=0.792  l1=0.243  kld=0.055  266 ms/step  ETA 0.4 min
+step   2950/3000  loss=0.878  l1=0.322  kld=0.056  266 ms/step  ETA 0.2 min
+step   3000/3000  loss=0.943  l1=0.310  kld=0.063  268 ms/step  ETA 0.0 min
+  [验证] 没见过的 2 条示教上 l1=0.502
+
+训练完成：3000 步，用时 13.3 分钟
+模型已保存: lab/outputs/02_train/act_shake/pretrained_model（207 MB）
+  config.json
+  model.safetensors
+  policy_postprocessor.json
+  policy_postprocessor_step_0_unnormalizer_processor.safetensors
+  policy_preprocessor.json
+  policy_preprocessor_step_3_normalizer_processor.safetensors
+loss 曲线: lab/outputs/02_train/act_shake/loss_curve.png
+
+等价的官方命令行（就是飞书教程第八步那条）:
+  lerobot-train --dataset.repo_id=TommyZihao/lerobot_zihao_dataset_shake_hands --dataset.root=lab/data/lerobot_zihao_dataset_shake_hands \
+    --dataset.revision=v0.1.0 --policy.type=act --policy.device=mps \
+    --output_dir=outputs/lerobot_train_act --steps=3000 --batch_size=8 \
+    --policy.push_to_hub=false --wandb.enable=false
