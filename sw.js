@@ -4,7 +4,7 @@
  * 所以内容更新后刷新一次就能看到，不会卡在旧版本。浏览器只在 https 或 localhost 下启用它。
  * 发布新内容时同步修改 CACHE（和 index.html 里的 ?v=），激活时会删掉旧版本的离线缓存。
  */
-const CACHE = 'eai-study-20261012c';
+const CACHE = 'eai-study-20261015a';
 
 self.addEventListener('install', (event) => {
   event.waitUntil(

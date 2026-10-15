@@ -122,7 +122,7 @@
   }
 
   App.route(/^\/courses$/, () => {
-    let html = '<h1 class="page-title">全部课程</h1><p class="muted">' + SITE.lessons.length + ' 课，分 8 个模块。每课包含：学习目标、讲解（嵌入式类比）、动手任务、自测题、面试话术、杭州就业场景。</p>';
+    let html = '<h1 class="page-title">全部课程</h1><p class="muted">' + SITE.lessons.length + ' 课，分 ' + SITE.levels.length + ' 个模块。每课包含：学习目标、讲解（嵌入式类比）、动手任务、自测题、面试话术、杭州就业场景。</p>';
     for (const lv of SITE.levels) {
       const lp = App.progress(lv.id);
       html +=
