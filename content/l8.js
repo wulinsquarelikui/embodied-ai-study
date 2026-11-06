@@ -303,7 +303,7 @@ SITE.lesson({
 | 项目 | 开源了 | 没开源 / 限制 |
 |---|---|---|
 | Open Duck Mini | 几乎全部：CAD、STL、BOM、组装接线图、树莓派运行时、训练环境、参考步态生成器、两份行走策略 | 基本没有；但主仓库最后提交在 2026-01-31，项目已不太活跃 |
-| Microduck | 机器人全部软件、训练环境、官方策略、「仿真鸭」 | 机械和电子设计；STL 网格是 CC BY-NC-SA 4.0，**不能商用** |
+| Microduck | 机器人全部软件、训练环境、官方策略、「仿真鸭」 | 完整的整机机械和电气生产资料；STL 网格是 CC BY-NC-SA 4.0，**不能商用** |
 | 跳跳 | 机器人模型、场景、任务和奖励、训练框架、导出和部署工具、示例策略包、Colab | 机械 CAD、生产 BOM、PCB、电气原理图、舵机制造资料 |
 
 ### 跳跳：链路最完整，真机部分还在打通
@@ -317,11 +317,12 @@ SITE.lesson({
 训练、仿真、导出已有测试覆盖；但 **RKNN 在板子上的推理还没验证，1 kHz 控制循环也还没真正驱动过电机总线**（[项目指南·项目状态](https://github.com/KingKongRobotics/jumper/blob/main/docs/PROJECT_GUIDE.zh.md)、[部署文档·未决](https://github.com/KingKongRobotics/jumper/blob/main/deploy/README.zh.md)）。教程里又提到板上回放参考帧结果为 0，两处说法有出入，**未核实**，以官方后续更新为准。
 :::
 
-### Microduck：软件全开，硬件不开
+### Microduck 的机载软件、训练环境和扩展板
 - **机器人软件**（Apache-2.0）：一组 Rust 守护进程。\`robotd\` 管 50 Hz 控制环和舵机总线，\`updaterd\` 管签名升级和回滚，还有蓝牙、手柄、摄像头（WebRTC）、ToF 等（[microduck](https://github.com/pollen-robotics/microduck)）。
 - **训练环境** [microduck_rl](https://github.com/pollen-robotics/microduck_rl)：MJCF 模型（从 Onshape 导出）、十几种任务（行走、摔倒爬起、坐下站起、踢球、前滚翻、轮滑……）、舵机模型、域随机化、齿隙仿真。
 - **官方策略**在 Hugging Face：[microduck-policies](https://huggingface.co/pollen-robotics/microduck-policies)。
 - **仿真鸭** \`scripts/duck-sim\`：真实的机器人守护进程接一个 MuJoCo 身体，没有真机也能开发（[simulation.md](https://github.com/pollen-robotics/microduck/blob/main/docs/robot/simulation.md)）。
+- Pollen 另有[通用 Robot HAT 的 KiCad 工程和生产文件](https://github.com/pollen-robotics/elec_RPI_Robot_HAT)。
 - 官方新闻稿特意写了「请不要称它为开源硬件」。国内的复刻项目，例如 [microduck-replica](https://github.com/fanhao375/microduck-replica)、[fanduck「超能花钱鸭」](https://github.com/7757/fanduck)、改用飞特舵机的 [microduck-hd1910m](https://github.com/zhuoligetu123/microduck-hd1910m)，是根据官方 MJCF 和源码反推的**社区项目**，不是官方，质量和合规要自己判断。
 
 ### Open Duck Mini：最适合拆开学
@@ -340,7 +341,7 @@ SITE.lesson({
       q: '下列哪一项「不属于」训练环境？',
       options: ['机器人的 MJCF / URDF 模型', '任务和奖励函数', '训练和导出脚本', '机械 CAD 和 PCB 设计文件'],
       answer: 3,
-      explain: '那是硬件设计。跳跳和 Microduck 都没开源硬件设计，只有 Open Duck Mini 连 CAD、BOM 都开源了。',
+      explain: '那是硬件设计。跳跳和 Microduck 的整机硬件资料不完整，只有 Open Duck Mini 连 CAD、BOM 都开源了。',
     },
     {
       q: '三个项目里，硬件设计（CAD、BOM）也开源的是？',
@@ -539,6 +540,8 @@ python v2_rl_walk_mujoco.py --onnx_model_path <路径>/BEST_WALK_ONNX_2.onnx
 - 一条很「嵌入式」的设置：把 USB 转串口芯片的 \`latency_timer\` 设成 1 ms，否则串口读写延迟会拖垮控制环。
 
 ### Microduck：从 Hugging Face 一条命令装
+
+只跟着一只鸭子走完全程，见 [Microduck 从仿真训练到板端行走](#/lesson/l8-7)。
 
 ~~~bash Microduck 导出、发布、安装
 # 在电脑上：导出 ONNX
@@ -752,7 +755,7 @@ Microduck 不想装东西：直接在浏览器里玩 [Microduck Sandbox](https:/
 | 选它 | 适合 | 缺点 |
 |---|---|---|
 | Open Duck Mini | 想最快上手、最懂底层：全开源，舵机和 SO-101 同款 | 项目已不太活跃，主要靠社区 |
-| Microduck | 想要成品和最活跃的生态 | 国内购买渠道**没查到**；硬件设计不开源 |
+| Microduck | 想要成品和最活跃的生态 | 国内购买渠道**没查到**；整机硬件资料不完整 |
 | 跳跳 | 想研究六足、跳跃和 NPU 部署 | 真机链路官方还在打通；零售价**没查到**，现在的渠道是动作大赛和联系销售 |
 
 Open Duck 可以自己造：按官方 BOM（中文版在子豪兄飞书）买件、3D 打印、组装。官方称整套低于 400 美元，以官方 BOM 和淘宝实际为准。你装 SO-101 时已经配过 STS3215 的 ID、校过零位，这一步会比大多数人快。
@@ -842,5 +845,76 @@ Open Duck 可以自己造：按官方 BOM（中文版在子豪兄飞书）买件
 **可关注的方向**：技术支持 / FAE、解决方案、开发者生态、技术产品（方向参考，以招聘页为准，见 [L7-1](#/lesson/l7-1) 和 [杭州公司地图](#/hangzhou)）。
 
 **能带去面试的作品**：本课的 Mac 实测数字 + 一页「仿真策略上机检查表」（[L8-5](#/lesson/l8-5)），再配一个你自己的 bit-exact 验证故事（[L7-3](#/lesson/l7-3)）。
+`,
+});
+
+SITE.lesson({
+  id: 'l8-7', level: 'L8', minutes: 12,
+  title: 'Microduck 从仿真训练到板端行走',
+  body: md`
+资料整理于 2026-11-02。以下以 Pollen 官方行走策略为例。社区复刻的进展来自作者记录，本项目以往在 Mac 上实测的是另一款 [Open Duck Mini](#/lesson/l8-6)。
+
+## 推一下摇杆，谁决定下一步怎么迈？
+
+你用摇杆给鸭子一个目标，例如「慢慢向前走」。假设此时右脚刚落地，身体略向左歪。机载主控读取 IMU 和关节反馈，把身体状态和目标交给行走策略。策略输出这一拍的关节动作，运行时换算成目标角，舵机执行。约 20 毫秒后身体姿态已经变了，主控再读一次，再算下一拍。同样推着摇杆，每拍得到的目标角可以不同。[官方运行时](https://github.com/pollen-robotics/microduck)、[控制环配置](https://github.com/pollen-robotics/microduck/blob/main/deploy/robotd.toml)
+
+:::info 模型和指令分别走哪条路
+训练电脑 → 导出 ONNX → 安装到机载主控。
+手柄目标 + IMU 和关节反馈 → 板上策略 → 舵机目标角 → 身体姿态变化 → 下一拍反馈。
+:::
+
+如果你写的是固定轨迹播放器，上层会按时间取出预先录好的关节目标，舵机自身仍可用反馈追踪目标。行走策略则连**下一拍要追踪的目标**也根据反馈重新计算。预装决定了可调用哪些技能。同一个步态能在训练覆盖的范围内前进、横移、转弯。踢球可以由按键触发另一个策略，摔倒恢复也可以由控制逻辑触发，具体取决于配置。官方还提供把走路和起身放进同一个策略的 VelStand 任务。[任务表](https://github.com/pollen-robotics/microduck_rl#tasks)、[手柄和技能](https://github.com/pollen-robotics/microduck/blob/main/docs/robot/cheatsheet.md)
+
+## 第一次让它走起来
+
+1. **先体验控制。** 在 Mac 浏览器里打开官方仿真，试前进、松开、转向。观察身体如何响应速度变化。此时使用已有模型，训练次数为零。[Microduck Sandbox](https://huggingface.co/spaces/pollen-robotics/microduck-simulator)
+2. **确认你做的是哪一版鸭子。** 核对主控、舵机、HAT、IMU 及接法，再选同一路线的系统镜像、运行时和模型。例如 fanhao 的飞特镜像面向 HD-1910 + Radxa Zero 3W，XL330 版另有机械资料和软件要求。[版本说明](https://github.com/fanhao375/microduck-replica#适用版本)
+3. **首次刷系统，再标定本机。** 按该路线的指南写系统镜像，在支架上核对舵机 ID、关节方向和零位、IMU 朝向，验证停机方式。先用配套现成模型站稳，再试小幅前进和转向。这能把装配或标定问题与自训模型问题分开。[kissqy 首次使用指南](https://kissqy.github.io/Microduck-kissqy/guides/)、[官方开发板配置](https://github.com/pollen-robotics/microduck/blob/main/docs/robot/install-dev.md)
+4. **区分上电与选动作。** 官方手柄流程中，第一次按 Start 给舵机上力并缓慢到初始姿态，再按才启用策略。复刻镜像的启动逻辑以该版本为准。训练电脑此时可以关机。下载模型、网页看状态和手柄遥控各有用途，逐拍的运动推理在机器人本地完成。[官方操作手册](https://github.com/pollen-robotics/microduck/blob/main/docs/robot/cheatsheet.md)
+
+## 想自己训练时，从平地行走开始
+
+训练的对象是一组网络权重。仿真器给虚拟鸭一个目标速度，网络给出关节动作，物理仿真推进一步，训练程序给表现打分。跟得上目标速度、站得稳、动作平顺是设计奖励时考虑的事情。PPO 根据许多这样的尝试更新权重。部署后，传感器数据持续变化，权重保持固定。训练时还可改变摩擦、电压和延迟，模拟齿隙，让策略接触各种工况。官方 BAM 舵机模型针对 XL330，飞特版优先使用该路线匹配的模型和参数。[训练仓库与执行器模型](https://github.com/pollen-robotics/microduck_rl)
+
+下表是官方行走任务的示例。训练命令在有 CUDA 的 NVIDIA 机器上的 microduck_rl 仓库目录执行，也可用已配置的 Hugging Face Jobs 提交云任务。用自己的 W&B 运行标识、实际导出的 ONNX 路径和有相应读写权限的 Hugging Face 仓库替换示例中的大写字段。[官方快速起步与策略发布](https://github.com/pollen-robotics/microduck_rl)、[云训练说明](https://github.com/pollen-robotics/microduck_rl/blob/develop/scripts/hf/README.md)
+
+| 在哪里 | 做什么 | 命令示例 |
+|---|---|---|
+| 训练机 | 选平地速度跟踪任务，并行仿真 4096 个环境，产生检查点 | \`uv run train Mjlab-Velocity-Flat-MicroDuck --env.scene.num-envs 4096\`（用云 GPU 可加 \`--hf-jobs\`） |
+| 有训练环境的电脑 | 从一次训练导出推理文件，连同观测归一化一起保存 | \`uv run scripts/export.py Mjlab-Velocity-Flat-MicroDuck --wandb-run-path ENTITY/PROJECT/RUN_ID\` |
+| 仿真电脑 | 用导出的文件试站立、前进和转向 | \`uv run scripts/infer_policy.py --walking MODEL.onnx\` |
+| 发布端 | 将验证过的文件和策略清单打包，指定它用于持续行走 | \`uv run publish --onnx MODEL.onnx --repo USER/microduck-my-walk --kind perpetual --slot walk\` |
+| 安装官方运行时的主控 | 下载并装入行走槽位 | \`sudo robotctl policy load walk USER/microduck-my-walk\` |
+
+刷系统是在存储介质上安装操作系统和驱动。换步态只需让现有运行时加载另一份策略文件。独立 IMU 转接板上的单片机固件又是另一份程序。三个操作的对象各不相同。[官方开发板安装](https://github.com/pollen-robotics/microduck/blob/main/docs/robot/install-dev.md)、[策略安装](https://github.com/pollen-robotics/microduck_rl#publishing-a-policy)、[社区传感器板固件](https://github.com/jyg9/microduck-community-kit)
+
+## 资料索引
+
+| 官方资源 | 读它可以弄清什么 |
+|---|---|
+| [pollen-robotics/microduck](https://github.com/pollen-robotics/microduck) | 机载 Rust 运行时（Apache-2.0）。robotd 管理 50 Hz 控制环和 15 个舵机。也可查开发板部署、手柄配对、OTA 和回滚。 |
+| [pollen-robotics/microduck_rl](https://github.com/pollen-robotics/microduck_rl) | MuJoCo Warp + PPO 训练、BAM 执行器模型、域随机化、齿隙与 ONNX 导出。任务表涵盖行走、起身、坐站、俯身捡拾和踢球。[官方现成策略](https://huggingface.co/pollen-robotics/microduck-policies) |
+| [pollen-robotics/elec_RPI_Robot_HAT](https://github.com/pollen-robotics/elec_RPI_Robot_HAT) | Pollen 通用扩展板，公开 KiCad、生产文件与版本记录。包含 I²C IMU、Dynamixel TTL/RS-485 接口和音频。独立的身体 IMU 总线桥 imu_to_dxl 在社区路线 4 有设计与固件。整机生产资料与这块 HAT 的公开范围需分别看。 |
+
+| 社区路线 | 最值得看的部分 |
+|---|---|
+| 1 · [kissqy](https://github.com/kissqy/Microduck-kissqy) | 飞特 HD1910 的采购、装配、镜像和标定流程。作者提供配套模型，普通复刻可直接从现成步态开始，注意它对 HAT、IMU 和 HUB 的版本要求。 |
+| 2 · [fanhao375](https://github.com/fanhao375/microduck-replica) | 有 CAD、BOM、飞特镜像和网页中控 Studio。首次使用指南把刷卡、配网、标定、停机测试和站立行走串起来。 |
+| 3 · [Fanduck 仓库](https://github.com/7757/fanduck) · [官网](https://duck.fandcode.com) | 对照物料、打印件、板件制造资料和分阶段实机记录。3D 镜像工作台用于观察姿态和采集关节数据。 |
+| 4 · [jyg9 硬件补充](https://github.com/jyg9/microduck-community-kit) · [飞特适配](https://github.com/jyg9/microduck_ft1910) | 主仓可追 imu_to_dxl 电路、固件及测试工具，另仓看机载软件如何适配飞特 HD1910M。作者标注移植仍在迭代。 |
+| 5 · [WhatDuck / 什么鸭](https://duck.whatled.com) | 作者分别记录了配套模型与自训模型的结果。10 月 17 日的前进、后退和横移用的是 kissqy 镜像随包模型，expE 步态另行训练。 |
+`,
+  tasks: md`
+- [ ] 在官方沙盒里分别尝试前进和转向，指出哪个量来自手柄、哪些量来自机器人。
+- [ ] 选一条复刻路线，从作者资料里找出对应的舵机型号、镜像和现成模型。
+`,
+  quiz: [{
+    q: '手柄一直给相同的前进指令，鸭子的身体突然向左倾。下一拍的关节目标由谁计算？',
+    options: ['训练用的云 GPU', '机载主控上的策略，根据最新姿态和关节反馈计算', '手柄按固定时间表下发'],
+    answer: 1,
+    explain: '摇杆指定期望速度，主控每约 20 毫秒结合当前观测重新推理一次。',
+  }],
+  hangzhou: md`
+**交付练习**：高校客户换了一批舵机，鸭子在仿真中走得稳，真机一启动就偏向一侧。请对照该路线的硬件清单，先查左右关节的方向、零位和 IMU 朝向，再确认板上加载的步态匹配这批舵机。
 `,
 });

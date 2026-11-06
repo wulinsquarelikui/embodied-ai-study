@@ -12,7 +12,7 @@
 
   const SITE = (window.SITE = {
     title: '具身智能转型学习站',
-    version: '2026-10-15a',
+    version: '2026-11-06a',
     verified: '2026-10',
     levels: [],
     lessons: [],
